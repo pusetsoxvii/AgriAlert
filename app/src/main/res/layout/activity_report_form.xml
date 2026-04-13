@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundBase">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Report Sick Animal"
+            android:textColor="@color/textDark"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="24dp"/>
+
+        <EditText
+            android:id="@+id/etAnimalType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_field"
+            android:hint="Animal Type (e.g. Cow, Pig, Poultry)"
+            android:textColor="@color/textDark"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp"/>
+            
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_field"
+            android:hint="Symptoms and Description"
+            android:textColor="@color/textDark"
+            android:padding="16dp"
+            android:minLines="3"
+            android:gravity="top|start"
+            android:layout_marginBottom="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+            
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:background="@drawable/bg_field"
+                android:text="Location unavailable..."
+                android:gravity="center_vertical"
+                android:textColor="@color/textDark"/>
+                
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnGetLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Get GPS"
+                android:background="@drawable/bg_glass_button"
+                android:textColor="@android:color/white"
+                android:layout_marginStart="8dp"
+                android:stateListAnimator="@null"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivPhotoPreview"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/bg_field"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTakePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_ghost_button"
+            android:text="Take Photo"
+            android:textColor="@color/textDark"
+            android:stateListAnimator="@null"
+            android:layout_marginBottom="32dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSubmitReport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_glass_button"
+            android:text="Submit Report"
+            android:textColor="@android:color/white"
+            android:stateListAnimator="@null"
+            android:layout_marginBottom="16dp"/>
+    </LinearLayout>
+</ScrollView>
