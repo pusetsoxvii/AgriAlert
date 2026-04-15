@@ -2,4 +2,32 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#2C6E9E</color>
+    <color name="colorPrimaryDark">#1E3A5F</color>
+    <color name="colorAccent">#C25E5A</color>
+    <color name="backgroundBase">#EFF5FC</color>
+    <color name="surfaceWhite">#FFFFFF</color>
+    
+    <!-- Text Colors -->
+    <color name="textDark">#1E3A5F</color>
+    <color name="textPrimary">#2C4C6E</color>
+    <color name="textSecondary">#6A8DAE</color>
+    <color name="textMuted">#8EACCC</color>
+    <color name="textSky">#3A82B9</color>
+
+    <!-- UI Elements Backgrounds -->
+    <color name="bgGlassButton">#E6F0FA</color>
+    <color name="bgGhostButton">#F4F9FF</color>
+    <color name="bgDangerButton">#FDE9E7</color>
+    <color name="bgField">#F4F9FF</color>
+    <color name="bgBadgeBlue">#E6F0FA</color>
+    <color name="bgBadgePurple">#EFE6FA</color>
+    <color name="bgBadgeRed">#FDE9E7</color>
+    <color name="bgBadgeAmber">#FFF3E0</color>
+    
+    <!-- Badge Texts -->
+    <color name="textBadgeBlue">#2C6E9E</color>
+    <color name="textBadgePurple">#6E5F9E</color>
+    <color name="textBadgeRed">#C25E5A</color>
+    <color name="textBadgeAmber">#B86F2C</color>
 </resources>
