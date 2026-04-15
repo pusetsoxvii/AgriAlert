@@ -42,7 +42,7 @@ public class ReportFormActivity extends AppCompatActivity {
     private EditText etAnimalType, etDescription;
     private TextView tvLocation;
     private ImageView ivPhotoPreview;
-    private Button btnGetLocation, btnTakePhoto, btnSubmitReport;
+    private Button btnGetLocation, btnTakePhoto, btnUploadPhoto, btnSubmitReport;
 
     private double latitude = 0.0;
     private double longitude = 0.0;
@@ -55,6 +55,17 @@ public class ReportFormActivity extends AppCompatActivity {
                     ivPhotoPreview.setImageBitmap(result);
                     ivPhotoPreview.setVisibility(View.VISIBLE);
                     imagePath = "preview_image"; 
+                }
+            }
+    );
+
+    private ActivityResultLauncher<String> pickImageLauncher = registerForActivityResult(
+            new ActivityResultContracts.GetContent(),
+            uri -> {
+                if (uri != null) {
+                    ivPhotoPreview.setImageURI(uri);
+                    ivPhotoPreview.setVisibility(View.VISIBLE);
+                    imagePath = uri.toString();
                 }
             }
     );
@@ -104,6 +115,7 @@ public class ReportFormActivity extends AppCompatActivity {
         ivPhotoPreview = findViewById(R.id.ivPhotoPreview);
         btnGetLocation = findViewById(R.id.btnGetLocation);
         btnTakePhoto = findViewById(R.id.btnTakePhoto);
+        btnUploadPhoto = findViewById(R.id.btnUploadPhoto);
         btnSubmitReport = findViewById(R.id.btnSubmitReport);
     }
 
@@ -116,6 +128,7 @@ public class ReportFormActivity extends AppCompatActivity {
                 takePictureLauncher.launch(null);
             }
         });
+        btnUploadPhoto.setOnClickListener(v -> pickImageLauncher.launch("image/*"));
         btnSubmitReport.setOnClickListener(v -> {
             int userId = sessionManager.getUserId();
             String animalType = etAnimalType.getText().toString();
