@@ -56,6 +56,52 @@ public class UserRepository {
         return result != -1;
     }
 
+    public boolean updateUserProfile(int userId, String newName, String newEmail) {
+    SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+    ContentValues values = new ContentValues();
+    values.put(DatabaseHelper.KEY_NAME, newName);
+    values.put(DatabaseHelper.KEY_EMAIL, newEmail);
+
+    int rows = db.update(DatabaseHelper.TABLE_USERS,
+        values,
+        DatabaseHelper.KEY_ID + "=?",
+        new String[]{String.valueOf(userId)});
+
+    return rows > 0;
+    }
+
+    public boolean changePassword(int userId, String oldPassword, String newPassword) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        // Verify old password
+        String oldHashed = HashUtil.hashPassword(oldPassword);
+        Cursor cursor = db.query(DatabaseHelper.TABLE_USERS,
+                new String[]{DatabaseHelper.KEY_ID},
+                DatabaseHelper.KEY_ID + "=? AND " + DatabaseHelper.KEY_PASSWORD + "=?",
+                new String[]{String.valueOf(userId), oldHashed},
+                null, null, null);
+
+        boolean validOld = (cursor != null && cursor.moveToFirst());
+        if (cursor != null) cursor.close();
+
+        if (!validOld) {
+            return false;
+        }
+
+        // Update to new password
+        SQLiteDatabase writableDb = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.KEY_PASSWORD, HashUtil.hashPassword(newPassword));
+
+        int rows = writableDb.update(DatabaseHelper.TABLE_USERS,
+                values,
+                DatabaseHelper.KEY_ID + "=?",
+                new String[]{String.valueOf(userId)});
+
+        return rows > 0;
+    }
+
     private boolean checkEmailExists(String email) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(DatabaseHelper.TABLE_USERS, 

@@ -2,8 +2,10 @@ package com.example.agrialert.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private Button btnLogin, btnRegister;
     private TextView tvRegister;
+    private ImageView ivToggleLoginPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +38,9 @@ public class LoginActivity extends AppCompatActivity {
         authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
 
         // Bind Views
-        etEmail = findViewById(R.id.etEmail);
-        etPassword = findViewById(R.id.etPassword);
+    etEmail = findViewById(R.id.etEmail);
+    etPassword = findViewById(R.id.etPassword);
+    ivToggleLoginPassword = findViewById(R.id.ivToggleLoginPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvRegister = findViewById(R.id.tvRegister);
 
@@ -51,7 +55,9 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
         });
 
-        btnLogin.setOnClickListener(v -> performLogin());
+    btnLogin.setOnClickListener(v -> performLogin());
+
+    setupPasswordToggle(etPassword, ivToggleLoginPassword);
 
         // Assuming btnRegister or tvRegister is used to traverse to RegisterActivity based on the xml setup
         if (tvRegister != null) {
@@ -71,6 +77,24 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         authViewModel.login(email, password);
+    }
+
+    private void setupPasswordToggle(EditText editText, ImageView toggleView) {
+        if (editText == null || toggleView == null) return;
+
+        toggleView.setOnClickListener(v -> {
+            int inputType = editText.getInputType();
+            boolean isPasswordVisible = (inputType & InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD)
+                    == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD;
+
+            if (isPasswordVisible) {
+                editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            } else {
+                editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            }
+
+            editText.setSelection(editText.getText().length());
+        });
     }
 
     private void navigateToDashboard(String role) {

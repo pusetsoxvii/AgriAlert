@@ -38,8 +38,9 @@ public class ReportFormActivity extends AppCompatActivity {
     private ReportFormViewModel viewModel;
     private SessionManager sessionManager;
     private LocationManager locationManager;
+    private com.example.agrialert.repository.ReportRepository reportRepository;
 
-    private EditText etAnimalType, etDescription;
+    private EditText etAnimalType, etDescription, etNumberAffected;
     private TextView tvLocation;
     private ImageView ivPhotoPreview;
     private Button btnGetLocation, btnTakePhoto, btnUploadPhoto, btnSubmitReport;
@@ -47,6 +48,7 @@ public class ReportFormActivity extends AppCompatActivity {
     private double latitude = 0.0;
     private double longitude = 0.0;
     private String imagePath = "";
+    private int editingReportId = -1;
 
     private ActivityResultLauncher<Void> takePictureLauncher = registerForActivityResult(
             new ActivityResultContracts.TakePicturePreview(),
@@ -97,20 +99,58 @@ public class ReportFormActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report_form);
+    setContentView(R.layout.activity_report_form);
 
-        sessionManager = new SessionManager(this);
-        viewModel = new ViewModelProvider(this).get(ReportFormViewModel.class);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    sessionManager = new SessionManager(this);
+    viewModel = new ViewModelProvider(this).get(ReportFormViewModel.class);
+    locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    reportRepository = new com.example.agrialert.repository.ReportRepository(this);
 
-        initViews();
-        setupListeners();
-        setupObservers();
+    initViews();
+    setupListeners();
+    setupObservers();
+
+    // Check if we are editing an existing report and, if so, load it from DB to prefill
+    editingReportId = getIntent().getIntExtra("reportId", -1);
+    if (editingReportId != -1) {
+        com.example.agrialert.model.Report existing = reportRepository.getReportById(editingReportId);
+        if (existing != null) {
+            if (existing.getAnimalType() != null) {
+                etAnimalType.setText(existing.getAnimalType());
+            }
+            if (existing.getSymptoms() != null) {
+                etDescription.setText(existing.getSymptoms());
+            }
+            latitude = existing.getLatitude();
+            longitude = existing.getLongitude();
+            if (existing.getLatitude() != 0.0 || existing.getLongitude() != 0.0) {
+                tvLocation.setText(String.format(Locale.getDefault(), "Lat: %.4f\nLng: %.4f",
+                        existing.getLatitude(), existing.getLongitude()));
+            }
+
+            String existingImagePath = existing.getImagePath();
+            if (existingImagePath != null && !existingImagePath.isEmpty()) {
+                try {
+                    ivPhotoPreview.setImageURI(android.net.Uri.parse(existingImagePath));
+                    ivPhotoPreview.setVisibility(View.VISIBLE);
+                    imagePath = existingImagePath;
+                } catch (Exception e) {
+                    // ignore and leave preview hidden/empty
+                }
+            }
+        }
+    }
+
+    View ivBack = findViewById(R.id.ivBack);
+    if (ivBack != null) {
+        ivBack.setOnClickListener(v -> onBackPressed());
+    }
     }
 
     private void initViews() {
-        etAnimalType = findViewById(R.id.etAnimalType);
-        etDescription = findViewById(R.id.etDescription);
+    etAnimalType = findViewById(R.id.etAnimalType);
+    etDescription = findViewById(R.id.etDescription);
+    etNumberAffected = findViewById(R.id.etNumberAffected);
         tvLocation = findViewById(R.id.tvLocation);
         ivPhotoPreview = findViewById(R.id.ivPhotoPreview);
         btnGetLocation = findViewById(R.id.btnGetLocation);
@@ -133,9 +173,27 @@ public class ReportFormActivity extends AppCompatActivity {
             int userId = sessionManager.getUserId();
             String animalType = etAnimalType.getText().toString();
             String symptoms = etDescription.getText().toString();
+            String numberStr = etNumberAffected.getText().toString().trim();
+            int numberAffected = 0;
+            if (!numberStr.isEmpty()) {
+                try {
+                    numberAffected = Integer.parseInt(numberStr);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(this, "Enter a valid number of animals affected", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+            if (numberAffected <= 0) {
+                Toast.makeText(this, "Number of animals affected must be greater than 0", Toast.LENGTH_SHORT).show();
+                return;
+            }
             String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
-            viewModel.submitReport(userId, animalType, symptoms, date, latitude, longitude, imagePath);
+            if (editingReportId == -1) {
+                viewModel.submitReport(userId, animalType, symptoms, numberAffected, date, latitude, longitude, imagePath);
+            } else {
+                viewModel.updateReport(editingReportId, userId, animalType, symptoms, numberAffected, date, latitude, longitude, imagePath);
+            }
         });
     }
 

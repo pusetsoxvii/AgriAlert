@@ -24,4 +24,8 @@ public class ViewReportsViewModel extends AndroidViewModel {
     public void loadUserReports(int userId) {
         _reports.setValue(repository.getReportsForUser(userId));
     }
+
+    public boolean deleteReport(int reportId) {
+        return repository.deleteReport(reportId);
+    }
 }

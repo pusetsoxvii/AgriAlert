@@ -9,7 +9,8 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "AgriAlert.db";
-    private static final int DATABASE_VERSION = 1;
+    // Bump version when schema changes (e.g., adding is_deleted column)
+    private static final int DATABASE_VERSION = 2;
 
     // Table Names
     public static final String TABLE_USERS = "users";
@@ -36,6 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_LATITUDE = "latitude";
     public static final String KEY_LONGITUDE = "longitude";
     public static final String KEY_IMAGE_PATH = "image_path";
+    public static final String KEY_IS_DELETED = "is_deleted";
 
     // RESPONSES Table - column names
     public static final String KEY_REPORT_ID = "report_id";
@@ -71,6 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_LATITUDE + " REAL,"
             + KEY_LONGITUDE + " REAL,"
             + KEY_IMAGE_PATH + " TEXT,"
+            + KEY_IS_DELETED + " INTEGER DEFAULT 0,"
             + "FOREIGN KEY(" + KEY_USER_ID + ") REFERENCES " + TABLE_USERS + "(" + KEY_ID + ")"
             + ")";
 
@@ -113,14 +116,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // on upgrade drop older tables
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ALERTS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESPONSES);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_REPORTS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
-
-        // create new tables
-        onCreate(db);
+        // Handle incremental migrations to preserve existing data
+        if (oldVersion < 2) {
+            // Add soft-delete flag for reports if it doesn't exist yet
+            try {
+                db.execSQL("ALTER TABLE " + TABLE_REPORTS + " ADD COLUMN "
+                        + KEY_IS_DELETED + " INTEGER DEFAULT 0");
+            } catch (Exception e) {
+                // Column may already exist; log and continue
+                Log.w("DatabaseHelper", "onUpgrade: failed to add is_deleted column", e);
+            }
+        }
+        // Future schema changes: handle with additional if (oldVersion < X) blocks
     }
 
     private void insertPredefinedAdmin(SQLiteDatabase db) {

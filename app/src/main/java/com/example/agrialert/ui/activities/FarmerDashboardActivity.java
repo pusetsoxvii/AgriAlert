@@ -1,6 +1,7 @@
 package com.example.agrialert.ui.activities;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.agrialert.R;
+import com.example.agrialert.repository.AlertRepository;
 import com.example.agrialert.ui.adapters.ReportAdapter;
 import com.example.agrialert.ui.viewmodels.FarmerDashboardViewModel;
 import com.example.agrialert.utils.SessionManager;
@@ -21,6 +23,7 @@ public class FarmerDashboardActivity extends AppCompatActivity {
     private FarmerDashboardViewModel viewModel;
     private SessionManager sessionManager;
     private TextView tvWelcomeBack, tvAvatarInitials, tvTotalReports, tvPendingReports;
+    private View layoutAlertBanner;
     private Button btnNewReport, btnViewReports;
     private RecyclerView rvRecentReports;
     private ReportAdapter adapter;
@@ -82,8 +85,14 @@ public class FarmerDashboardActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        findViewById(R.id.navAlerts).setOnClickListener(v -> Toast.makeText(this, "Alerts coming soon", Toast.LENGTH_SHORT).show());
-        findViewById(R.id.navProfile).setOnClickListener(v -> Toast.makeText(this, "Profile coming soon", Toast.LENGTH_SHORT).show());
+        findViewById(R.id.navAlerts).setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(FarmerDashboardActivity.this, AlertsActivity.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.navProfile).setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(FarmerDashboardActivity.this, ProfileActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -100,6 +109,7 @@ public class FarmerDashboardActivity extends AppCompatActivity {
         tvAvatarInitials = findViewById(R.id.tvAvatarInitials);
         tvTotalReports = findViewById(R.id.tvTotalReports);
         tvPendingReports = findViewById(R.id.tvPendingReports);
+    layoutAlertBanner = findViewById(R.id.layoutAlertBanner);
         btnNewReport = findViewById(R.id.btnReportSick);
         btnViewReports = findViewById(R.id.btnViewReports);
         
@@ -113,6 +123,18 @@ public class FarmerDashboardActivity extends AppCompatActivity {
         tvWelcomeBack.setText("Hello, " + userName);
         if (userName != null && !userName.isEmpty()) {
             tvAvatarInitials.setText(userName.substring(0, 1).toUpperCase());
+        }
+
+        // Show alert banner only if there are alerts in DB
+        AlertRepository alertRepository = new AlertRepository(this);
+        if (!alertRepository.getAllAlerts().isEmpty()) {
+            layoutAlertBanner.setVisibility(View.VISIBLE);
+            layoutAlertBanner.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(FarmerDashboardActivity.this, AlertsActivity.class);
+                startActivity(intent);
+            });
+        } else {
+            layoutAlertBanner.setVisibility(View.GONE);
         }
     }
 

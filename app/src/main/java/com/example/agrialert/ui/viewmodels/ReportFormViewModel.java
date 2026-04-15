@@ -18,7 +18,8 @@ public class ReportFormViewModel extends AndroidViewModel {
         repository = new ReportRepository(application);
     }
 
-    public void submitReport(int userId, String animalType, String symptoms, String dateObserved, double lat, double lng, String imagePath) {
+    public void submitReport(int userId, String animalType, String symptoms, int numberAffected,
+                             String dateObserved, double lat, double lng, String imagePath) {
         if (animalType == null || animalType.trim().isEmpty()) {
             _errorMessage.setValue("Animal type is required.");
             return;
@@ -27,11 +28,29 @@ public class ReportFormViewModel extends AndroidViewModel {
             _errorMessage.setValue("Symptoms are required.");
             return;
         }
-        boolean success = repository.insertReport(userId, animalType, symptoms, 1, dateObserved, lat, lng, imagePath);
+    boolean success = repository.insertReport(userId, animalType, symptoms, numberAffected, dateObserved, lat, lng, imagePath);
         if (success) {
             _reportSubmissionStatus.setValue(true);
         } else {
             _errorMessage.setValue("Failed to submit report. Try again.");
+        }
+    }
+
+    public void updateReport(int reportId, int userId, String animalType, String symptoms, int numberAffected,
+                             String dateObserved, double lat, double lng, String imagePath) {
+        if (animalType == null || animalType.trim().isEmpty()) {
+            _errorMessage.setValue("Animal type is required.");
+            return;
+        }
+        if (symptoms == null || symptoms.trim().isEmpty()) {
+            _errorMessage.setValue("Symptoms are required.");
+            return;
+        }
+    boolean success = repository.updateReport(reportId, userId, animalType, symptoms, numberAffected, dateObserved, lat, lng, imagePath);
+        if (success) {
+            _reportSubmissionStatus.setValue(true);
+        } else {
+            _errorMessage.setValue("Failed to update report. Try again.");
         }
     }
 }
