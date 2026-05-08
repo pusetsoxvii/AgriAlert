@@ -1,0 +1,63 @@
+# Gradle and Android
+/build/
+**/build/
+/.gradle/
+/.idea/
+/.idea/*
+/*.iml
+/.cxx/
+
+# Local configuration
+local.properties
+
+# Kotlin
+.gradle/
+
+# Android Studio captures and outputs
+/captures/
+/output.json
+
+# Signing keys
+*.jks
+*.keystore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Generated files
+**/generated/
+**/intermediates/
+**/outputs/
+
+# IntelliJ
+.idea/
+.idea/*
+
+# NDK
+obj/
+
+# Misc
+*.swp
+*.swo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties

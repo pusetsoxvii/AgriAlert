@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.AgriAlert"
+        parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/clayBlue</item>
+        <item name="colorPrimaryVariant">@color/clayBlueDark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/claySurface</item>
+        <item name="android:statusBarColor">@color/clayBlue</item>
+    </style>
+
+    <!-- Clay morphism card -->
+    <style name="ClayCard">
+        <item name="android:background">@color/clayWhite</item>
+        <item name="cardBackgroundColor">@color/clayWhite</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+        <item name="strokeColor">@color/clayBorder</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:layout_marginStart">4dp</item>
+        <item name="android:layout_marginEnd">4dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
+
+    <!-- Primary filled button -->
+    <style name="ClayButton"
+        parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/clayBlue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- Outline button -->
+    <style name="ClayButtonOutline"
+        parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/clayBlue</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="strokeColor">@color/clayBlue</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- Badge styles -->
+    <style name="Badge">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="BadgeRed" parent="Badge">
+        <item name="android:background">@drawable/bg_badge_red</item>
+    </style>
+    <style name="BadgeAmber" parent="Badge">
+        <item name="android:background">@drawable/bg_badge_amber</item>
+    </style>
+    <style name="BadgeGreen" parent="Badge">
+        <item name="android:background">@drawable/bg_badge_green</item>
+    </style>
+    <style name="BadgeBlue" parent="Badge">
+        <item name="android:background">@drawable/bg_badge_blue</item>
+    </style>
+    <style name="BadgePurple" parent="Badge">
+        <item name="android:background">@drawable/bg_badge_purple</item>
+    </style>
+    <style name="BadgeIndigo" parent="Badge">
+        <item name="android:background">@drawable/bg_badge_indigo</item>
+    </style>
+    <style name="BadgeGray" parent="Badge">
+        <item name="android:background">@drawable/bg_badge_gray</item>
+    </style>
+
+    <!-- Input field -->
+    <style name="ClayInput"
+        parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/claySurface</item>
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxStrokeColor">@color/clayBorder</item>
+        <item name="hintTextColor">@color/textSecondary</item>
+    </style>
+
+</resources>

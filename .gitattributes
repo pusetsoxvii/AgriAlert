@@ -1,0 +1,11 @@
+* text=auto
+*.gradle text
+*.kt text
+*.kts text
+*.java text
+*.xml text
+*.properties text
+*.md text
+
+# Ensure shell scripts keep LF
+*.sh eol=lf

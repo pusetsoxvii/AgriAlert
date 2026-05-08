@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AgriAlert</string>
+    <string name="app_tagline">Tlhokomelo ea liphoofolo · Lesotho</string>
+    <string name="app_version">AgriAlert v1.0 · Botho University</string>
+
+    <!-- Auth -->
+    <string name="login_title">Re u amohela ho AgriAlert</string>
+    <string name="login_subtitle">Kena ho tsoela pele</string>
+    <string name="register_title">Theha ak\'haonte</string>
+    <string name="btn_login">Kena</string>
+    <string name="btn_register">Theha ak\'haonte</string>
+    <string name="btn_logout">Tsoa</string>
+    <string name="hint_email">Aterese ea imeile</string>
+    <string name="hint_password">Phasewete</string>
+    <string name="hint_name">Lebitso le feletseng</string>
+    <string name="hint_phone">Nomoro ea mohala</string>
+    <string name="hint_confirm_password">Tiisa phasewete</string>
+    <string name="label_role">Khetha karolo</string>
+    <string name="label_district">Khetha setereke</string>
+    <string name="label_language">Fetola puo</string>
+
+    <!-- Errors -->
+    <string name="error_email_empty">Kenya imeile ea hau</string>
+    <string name="error_email_invalid">Kenya imeile e nepahetseng</string>
+    <string name="error_email_taken">Imeile ena e se e ngolisitsoe</string>
+    <string name="error_password_empty">Kenya phasewete ea hau</string>
+    <string name="error_password_short">Phasewete e lokela ho ba le litlhaku tse 6 kapa ho feta</string>
+    <string name="error_passwords_no_match">Liphasewete ha li tšoane</string>
+    <string name="error_name_empty">Kenya lebitso la hau le feletseng</string>
+    <string name="error_phone_empty">Kenya nomoro ea hau ea mohala</string>
+    <string name="error_role_empty">Khetha karolo ea hau</string>
+    <string name="error_district_empty">Khetha setereke sa heno</string>
+    <string name="error_wrong_credentials">Imeile kapa phasewete ha lia nepahala</string>
+    <string name="error_account_inactive">Ak\'haonte e emisitsoe. Ikopanye le molaoli.</string>
+    <string name="error_generic">Ho na le phoso e etsahetseng. Ka kopo leka hape.</string>
+    <string name="error_load_failed">Lintlha ha lia khona ho tsoa. Ka kopo leka hape.</string>
+    <string name="error_submit_failed">Ho hlolehile ho romela. Ka kopo leka hape.</string>
+    <string name="error_location_timeout">Sebaka ha sea fumaneha. Ka kopo leka hape.</string>
+    <string name="error_location_permission">Tumello ea sebaka e ea hlokahala</string>
+
+    <!-- Farmer -->
+    <string name="btn_report_animal">+ Tlaleha phoofolo e kulang</string>
+    <string name="btn_view_reports">Sheba litlaleho tsa ka</string>
+    <string name="hint_symptoms">Hlalosa matšoao ka botlalo (bonyane litlhaku tse 20)</string>
+    <string name="hint_animals_affected">Palo ea liphoofolo tse amehileng</string>
+    <string name="hint_response_message">Ngola keletso ea hau mona...</string>
+    <string name="label_animal_type">Mofuta oa phoofolo</string>
+    <string name="label_date_observed">Letsatsi leo bohloko bo bonoeng ka lona</string>
+    <string name="label_capture_location">Fumana sebaka ka GPS</string>
+    <string name="label_location_captured">Sebaka se fumanoe</string>
+    <string name="label_take_photo">Nka senepe</string>
+    <string name="label_choose_gallery">Khetha ho tsoa laebraring</string>
+    <string name="label_remove_photo">Tlosa senepe</string>
+    <string name="label_no_photo">Ha ho senepe se kentsoeng</string>
+    <string name="label_awaiting_response">Ho engoetsoe karabo ho tsoa ho ngaka ea liphoofolo</string>
+    <string name="empty_reports">Ha ho litlaleho tse kentsweng.\nTobetsa konopo e ka tlaase ho tlaleha phoofolo e kulang.</string>
+    <string name="empty_alerts">Ha ho litemoso tsa mafu sebakeng sa heno</string>
+    <string name="empty_notifications">Ha ho na litsebiso hajoale</string>
+
+    <!-- Vet -->
+    <string name="btn_view_all_reports">Sheba litlaleho tsohle</string>
+    <string name="btn_send_alert">Romela temoso ea lefu</string>
+    <string name="btn_submit_response">Romela karabo</string>
+    <string name="hint_alert_message">Hlalosa ka qhoma ea lefu le mehato ea thibelo (bonyane litlhaku tse 30)</string>
+    <string name="label_select_disease">Khetha lefu</string>
+    <string name="label_select_region">Khetha sebaka se lebisitsoeng</string>
+    <string name="label_select_severity">Khetha boemo ba kotsi</string>
+    <string name="label_will_notify">Sena se tla tsebisa lihoai tse %d seterekeng sa %s</string>
+    <string name="empty_pending_reports">Ha ho na litlaleho tse emetseng seterekeng sa heno</string>
+    <string name="empty_vet_alerts">Ha ho litemoso tse rometsoeng hajoale</string>
+
+    <!-- Admin -->
+    <string name="btn_manage_users">Basebelisi</string>
+    <string name="btn_all_reports">Litlaleho</string>
+    <string name="btn_all_alerts">Litemoso</string>
+    <string name="btn_view_stats">Lipalo</string>
+    <string name="btn_send_notification">Romela tsebiso</string>
+    <string name="btn_activate">Khandolla</string>
+    <string name="btn_deactivate">Emisa</string>
+    <string name="btn_delete_report">Tlosa tlaleho</string>
+    <string name="label_see_all">Sheba tsohle →</string>
+    <string name="confirm_activate">Ba tla khona ho kena ho AgriAlert.</string>
+    <string name="confirm_deactivate">Ba ke ke ba khona ho kena.</string>
+    <string name="confirm_delete_report">O tiile o batla ho tlosa tlaleho ena ka ho sa feleng?</string>
+    <string name="admin_credentials_info">Lintlha tsa molaoli li tsamaisoa ka har\'a faele ea tlhophiso ea sesebelisoa. Ikopanye le moqapi oa hau ho nchafatsa lintlha tsena.</string>
+    <string name="empty_users">Ha ho basebelisi ba fumanoeng</string>
+    <string name="empty_all_reports">Ha ho litlaleho ka har\'a sesebelisoa hajoale</string>
+    <string name="empty_all_alerts">Ha ho litemoso tse seng li rometsoe</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Lapeng</string>
+    <string name="nav_reports">Litlaleho</string>
+    <string name="nav_alerts">Litemoso</string>
+    <string name="nav_profile">Ak\'haonte</string>
+    <string name="nav_users">Basebelisi</string>
+
+    <!-- Status labels -->
+    <string name="status_pending">Ho engoetsoe</string>
+    <string name="status_investigating">E ntse e hlahlojoa</string>
+    <string name="status_advice">Keletso e fanoe</string>
+    <string name="status_visit">Ketelo e reriloe</string>
+    <string name="status_resolved">E rarollotsoe</string>
+    <string name="status_active">E sebetsa</string>
+    <string name="status_inactive">Ha e sebetse</string>
+</resources>
